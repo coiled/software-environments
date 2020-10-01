@@ -18,7 +18,7 @@ jobs:
           org: "conda-forge"
           package: "dask"
 
-      - name: Find and replace coiled version
+      - name: Find and replace Dask version
         uses: jacobtomlinson/gha-find-replace@0.1.1
         with:
           find: "dask=.* "
