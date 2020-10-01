@@ -24,7 +24,7 @@ jobs:
         id: find_and_replace
         uses: jacobtomlinson/gha-find-replace@0.1.1
         with:
-          find: "dask=.*"
+          find: "dask=.* "
           replace: "dask=${{ steps.latest_version.outputs.version }} "
 
       - name: Output changed files
