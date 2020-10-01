@@ -35,6 +35,6 @@ jobs:
           auto-update-conda: true
           environment-file: ${{ matrix.env-file }}
 
-      - name: Conda info
+      - name: List conda packages
         shell: bash -l {0}
-        run: conda info
+        run: conda list
