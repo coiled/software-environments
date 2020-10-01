@@ -1,0 +1,25 @@
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.8
+  - pip
+  - python-blosc
+  - cytoolz
+  - dask=2.23.0
+  - lz4
+  - numpy>=1.19.0
+  - pandas>=1.1.0
+  - bokeh>=2.1.1
+  - dask-image>=0.3.0
+  - dask-ml>=1.5.0
+  - s3fs
+  - numba
+  - pyarrow>=0.15.1
+  - python-graphviz
+  - scikit-learn>=0.23.1
+  - h5py
+  - xarray
+  - bottleneck
+  - requests
+  - pillow>=7.2.0
