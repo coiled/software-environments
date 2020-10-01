@@ -1,10 +1,8 @@
 name: Check for new Dask version on conda-forge
 
 on:
-  pull_request:
-    branches: main
-  # schedule:
-  #   - cron: "0 * * * *"
+  schedule:
+    - cron: "0 * * * *"
 
 jobs:
   check-version:
@@ -24,7 +22,7 @@ jobs:
         id: find_and_replace
         uses: jacobtomlinson/gha-find-replace@0.1.1
         with:
-          find: "dask=.* "
+          find: "dask=.*"
           replace: "dask=${{ steps.latest_version.outputs.version }} "
 
       - name: Output changed files
