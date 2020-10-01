@@ -1,0 +1,40 @@
+
+name: Build conda environments
+
+on:
+  pull_request:
+    branches: main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        software-env: ["default-py36", "default-py37", "default-py38", "default"]
+        include:
+          - software-env: "default-py36"
+            env-file: default/environment-py36.yml
+
+          - software-env: "default-py37"
+            env-file: default/environment-py37.yml
+
+          - software-env: "default-py38"
+            env-file: default/environment-py38.yml
+
+          - software-env: "default"
+            env-file: default/environment-py38.yml
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v2
+      
+      - name: Build ${{ matrix.software-env }} conda environment
+        uses: conda-incubator/setup-miniconda@v1
+        with:
+          auto-update-conda: true
+          environment-file: ${{ matrix.env-file }}
+
+      - name: List conda packages
+        shell: bash -l {0}
+        run: conda list
