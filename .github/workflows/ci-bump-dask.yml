@@ -21,10 +21,14 @@ jobs:
           package: "dask"
 
       - name: Find and replace Dask version
+        id: find_and_replace
         uses: jacobtomlinson/gha-find-replace@0.1.1
         with:
           find: "dask=.*"
           replace: "dask=${{ steps.latest_version.outputs.version }} "
+
+      - name: Output changed files
+        run: echo ${{ steps.find_and_replace.outputs.modifiedFiles }}
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v2
