@@ -30,10 +30,10 @@ jobs:
             env-file: default/environment-py38.yml
           
           - server: "https://cloud.coiled.io"
-            token: ${{ secrets.CLOUD_TOKEN }}
+            token-name: CLOUD_TOKEN
 
           - server: "https://sandbox.coiledhq.com"
-            token: ${{ secrets.SANDBOX_TOKEN }}
+            token-name: SANDBOX_TOKEN
 
     steps:
       - name: Checkout source
@@ -48,5 +48,5 @@ jobs:
       - name: Build ${{ matrix.software-env }} software environment 
         env:
           DASK_COILED__SERVER: ${{ matrix.server }}
-          DASK_COILED__TOKEN: ${{ matrix.token }}
+          DASK_COILED__TOKEN: ${{ secrets[matrix.token-name] }}
         run: coiled env create --name coiled/${{ matrix.software-env }} --conda ${{ matrix.env-file }}
