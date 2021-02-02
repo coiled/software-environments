@@ -4,9 +4,6 @@ name: Update software environments
 on:
   push:
     branches: main
-  # TODO: Remove pull_request builds
-  pull_request:
-    branches: main
 
 jobs:
   build:
