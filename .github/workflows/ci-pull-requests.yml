@@ -11,11 +11,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        software-env: ["default-py36", "default-py37", "default-py38", "default"]
+        software-env: ["default-py37", "default-py38", "default"]
         include:
-          - software-env: "default-py36"
-            env-file: default/environment-py36.yml
-
           - software-env: "default-py37"
             env-file: default/environment-py37.yml
 
