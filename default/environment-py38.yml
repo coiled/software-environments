@@ -13,7 +13,7 @@ dependencies:
   - bokeh>=2.1.1
   - dask-image>=0.3.0
   - dask-ml>=1.5.0
-  - s3fs
+  - s3fs>=2021.8.0
   - numba
   - pyarrow>=0.15.1
   - python-graphviz
