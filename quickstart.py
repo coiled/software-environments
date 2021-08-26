@@ -28,3 +28,6 @@ df = dd.read_csv(
 ).persist()
 
 df.groupby("passenger_count").tip_amount.mean().compute()
+
+client.close()
+cluster.close()
