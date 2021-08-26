@@ -10,7 +10,11 @@ from dask.distributed import Client
 
 SOFTWARE = os.environ["SOFTWARE_ENV"]
 
-cluster = coiled.Cluster(software=SOFTWARE, n_workers=10)
+cluster = coiled.Cluster(
+    software=SOFTWARE,
+    n_workers=10,
+    backend_options={"spot": False},
+)
 
 client = Client(cluster)
 
