@@ -25,9 +25,11 @@ jobs:
 
           - server: "https://cloud.coiled.io"
             token-name: CLOUD_TOKEN
+            account: coiled-software-environments-bot
 
           - server: "https://staging.coiledhq.com"
             token-name: SANDBOX_TOKEN
+            account: coiled-software-environments-bot
 
     steps:
       - name: Checkout source
@@ -52,12 +54,12 @@ jobs:
           DASK_COILED__SERVER: ${{ matrix.server }}
           DASK_COILED__TOKEN: ${{ secrets[matrix.token-name] }}
         shell: bash -l {0}
-        run: coiled env create --name coiled-software-environments-bot/${{ matrix.software-env }} --conda ${{ matrix.env-file }}
+        run: coiled env create --name ${{ matrix.account }}/${{ matrix.software-env }} --conda ${{ matrix.env-file }}
 
       - name: Run quickstart
         env:
           DASK_COILED__SERVER: ${{ matrix.server }}
           DASK_COILED__TOKEN: ${{ secrets[matrix.token-name] }}
-          SOFTWARE_ENV: coiled-software-environments-bot/${{ matrix.software-env }}
+          SOFTWARE_ENV: ${{ matrix.account }}/${{ matrix.software-env }}
         shell: bash -l {0}
         run: python quickstart.py
