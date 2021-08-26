@@ -11,7 +11,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        software-env: ["default-py37", "default-py38", "default-py39", "default"]
+        software-env: ["default-py37", "default-py38", "default-py39"]
         include:
           - software-env: "default-py37"
             env-file: default/environment-py37.yml
@@ -22,14 +22,11 @@ jobs:
           - software-env: "default-py39"
             env-file: default/environment-py39.yml
 
-          - software-env: "default"
-            env-file: default/environment-py39.yml
-
     steps:
       - name: Checkout source
         uses: actions/checkout@v2
       
-      - name: Build ${{ matrix.software-env }} conda environment
+      - name: Build local ${{ matrix.software-env }} conda environment
         uses: conda-incubator/setup-miniconda@v2
         with:
           auto-update-conda: true
@@ -38,3 +35,18 @@ jobs:
       - name: List conda packages
         shell: bash -l {0}
         run: conda list
+
+      - name: Build ${{ matrix.software-env }} software environment
+        env:
+          DASK_COILED__SERVER: ${{ matrix.server }}
+          DASK_COILED__TOKEN: ${{ secrets[matrix.token-name] }}
+        shell: bash -l {0}
+        run: coiled env create --name coiled-software-environments-bot/${{ matrix.software-env }} --conda ${{ matrix.env-file }}
+
+      - name: Run quickstart
+        env:
+          DASK_COILED__SERVER: ${{ matrix.server }}
+          DASK_COILED__TOKEN: ${{ secrets[matrix.token-name] }}
+          SOFTWARE_ENV: coiled-software-environments-bot/${{ matrix.software-env }}
+        shell: bash -l {0}
+        run: python quickstart.py
