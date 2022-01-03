@@ -24,7 +24,7 @@ jobs:
             env-file: default/environment-py39.yml
 
           - software-env: "default-py310"
-              env-file: default/environment-py310.yml
+            env-file: default/environment-py310.yml
 
           - server: "https://cloud.coiled.io"
             token-name: CLOUD_TOKEN
