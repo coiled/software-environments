@@ -25,7 +25,7 @@ jobs:
             env-file: default/environment-py39.yml
 
           - software-env: "default-py310"
-              env-file: default/environment-py310.yml
+            env-file: default/environment-py310.yml
 
           - software-env: "default"
             env-file: default/environment-py39.yml
