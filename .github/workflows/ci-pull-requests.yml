@@ -11,7 +11,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        software-env: ["default-py37", "default-py38", "default-py39"]
+        software-env: ["default-py37", "default-py38", "default-py39", "default-py310"]
         server: ["https://cloud.coiled.io", "https://staging.coiledhq.com", "https://development.coiledhq.com"]
         include:
           - software-env: "default-py37"
@@ -22,6 +22,9 @@ jobs:
 
           - software-env: "default-py39"
             env-file: default/environment-py39.yml
+
+          - software-env: "default-py310"
+              env-file: default/environment-py310.yml
 
           - server: "https://cloud.coiled.io"
             token-name: CLOUD_TOKEN
