@@ -1,4 +1,4 @@
-name: Check for new Dask version on conda-forge
+name: Check for new coiled-runtime version
 
 on:
   schedule:
@@ -11,19 +11,20 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - name: Get latest Dask version
+      - name: Get latest coiled-runtime version
         id: latest_version
         uses: jacobtomlinson/gha-anaconda-package-version@0.1.1
         with:
-          org: "conda-forge"
-          package: "dask"
+          # TODO: Update to conda-forge once coiled-runtime is available there
+          org: "coiled"
+          package: "coiled-runtime"
 
-      - name: Find and replace Dask version
+      - name: Find and replace coiled-runtime version
         id: find_and_replace
         uses: jacobtomlinson/gha-find-replace@0.1.1
         with:
-          find: "dask=[.0-9]+"
-          replace: "dask=${{ steps.latest_version.outputs.version }}"
+          find: "coiled-runtime=[.0-9]+"
+          replace: "coiled-runtime=${{ steps.latest_version.outputs.version }}"
 
       - name: Output changed files
         run: echo ${{ steps.find_and_replace.outputs.modifiedFiles }}
@@ -33,11 +34,11 @@ jobs:
         with:
           author: github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>
           token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: "Update Dask version to ${{ steps.latest_version.outputs.version }}"
-          title: "Update Dask version to ${{ steps.latest_version.outputs.version }}"
+          commit-message: "Update coiled-runtime version to ${{ steps.latest_version.outputs.version }}"
+          title: "Update coiled-runtime version to ${{ steps.latest_version.outputs.version }}"
           reviewers: "jrbourbeau"
           branch: "upgrade-package-versions"
           body: |
-            A new Dask version has been detected.
+            A new coiled-runtime version has been detected.
 
-            Updated Dask to `${{ steps.latest_version.outputs.version }}`.
+            Updated coiled-runtime to `${{ steps.latest_version.outputs.version }}`.
