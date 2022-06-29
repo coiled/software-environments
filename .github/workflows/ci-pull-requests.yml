@@ -11,17 +11,17 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        software-env: ["default-py37", "default-py38", "default-py39"]
-        server: ["https://cloud.coiled.io", "https://staging.coiledhq.com", "https://development.coiledhq.com"]
+        software-env: ["default-py38", "default-py39", "default-py310"]
+        server: ["https://cloud.coiled.io", "https://staging.coiledhq.com"]
         include:
-          - software-env: "default-py37"
-            env-file: default/environment-py37.yml
-
           - software-env: "default-py38"
             env-file: default/environment-py38.yml
 
           - software-env: "default-py39"
             env-file: default/environment-py39.yml
+
+          - software-env: "default-py310"
+            env-file: default/environment-py310.yml
 
           - server: "https://cloud.coiled.io"
             token-name: CLOUD_TOKEN
@@ -29,10 +29,6 @@ jobs:
 
           - server: "https://staging.coiledhq.com"
             token-name: SANDBOX_TOKEN
-            account: coiled-software-environments-bot
-
-          - server: "https://development.coiledhq.com"
-            token-name: DEV_TOKEN
             account: coiled-software-environments-bot
 
     steps:

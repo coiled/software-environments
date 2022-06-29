@@ -12,17 +12,17 @@ jobs:
       max-parallel: 4
       matrix:
         software-env:
-          ["default-py37", "default-py38", "default-py39", "default"]
-        server: ["https://cloud.coiled.io", "https://staging.coiledhq.com", "https://development.coiledhq.com"]
+          ["default-py38", "default-py39", "default-py310", "default"]
+        server: ["https://cloud.coiled.io", "https://staging.coiledhq.com"]
         include:
-          - software-env: "default-py37"
-            env-file: default/environment-py37.yml
-
           - software-env: "default-py38"
             env-file: default/environment-py38.yml
 
           - software-env: "default-py39"
             env-file: default/environment-py39.yml
+
+          - software-env: "default-py310"
+            env-file: default/environment-py310.yml
 
           - software-env: "default"
             env-file: default/environment-py39.yml
@@ -32,9 +32,6 @@ jobs:
 
           - server: "https://staging.coiledhq.com"
             token-name: SANDBOX_TOKEN
-
-          - server: "https://development.coiledhq.com"
-            token-name: DEV_TOKEN
 
     steps:
       - name: Checkout source
